@@ -1,0 +1,36 @@
+# Django related files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Development server
+*.sqlite3
+*.db
+
+# Secret key configuration
+.secret_key
+
+# Static files
+static/
+media/
+
+# Compiled files
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+.env
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+
+# Dependency management
+pip-lock.txt
+pipenv.lock

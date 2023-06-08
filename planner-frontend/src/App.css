@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:'Roboto', sans-serif !important;
+}
+
+.App {
+  width: 100%;
+  overflow: hidden;
+  background-color:#cee7ff;
+  min-height: 100vh;
+}
+
+.srbtns {
+  color: white;
+}
+
+#sign {
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 90%;
+  margin: auto;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.transactionsTable {
+  min-width: 800px;
+}
+
+.transactionsTable thead {
+  background-color: #00aeff;
+}
+
+.transactionsTable th {
+  background-color: transparent !important;
+}
+
+.b-ed {
+  height: fit-content;
+  padding: 0 5px 0 5px !important;
+}
+
+.new-custy {
+  max-width: 90% !important;
+  margin: auto;
+  width: 600px;
+}
+
+.earningspie {
+  width: 400px;
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 400px) {
+  .earningspie {
+    width: 95%;
+    padding: 0px;
+  }
+}
+
+.earningspie h3 {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.paymentfilters {
+  display: flex;
+  background-color: #58aeff;
+  justify-content: space-evenly;
+  text-align: center;
+  padding: 5px;
+  align-items: center;
+  margin: auto;
+}
+
+.paymentfilters button {
+  height: fit-content;
+}
+
+h1 {
+  text-align: center;
+  text-decoration: underline;
+  padding-bottom: 20px;
+}
+
+h2, h3 {
+  text-align: center;
+}
+
+.page-buttons {
+  display: flex;
+  width: fit-content;
+  margin: auto;
+}
+
+.page-buttons Button {
+  margin: 10px;
+}
+
+.navbar {
+  background-color: white;
+  border-bottom: 1px solid #00aeff;
+  position: fixed !important;
+  width: 100%;
+  z-index: 6;
+}
+
+@media (max-width: 991.98px) {
+  .navbar a {
+    color: #00aeff;
+    padding-left: 10px;
+  }
+  
+  .navbar .nav-link {
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  
+  /* Optional: Add additional styles to the logout button */
+  .logout-container button {
+    margin-top: 5px;
+    margin-left: 10px; /* Adjust the margin as needed */
+  }
+}
+
+.navbrand {
+  margin-left: 10px;
+}
+
+@media (min-width: 992px) {
+  .navlinks {
+    display: flex;
+    width: 70% !important;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: auto;
+  }
+  
+  .logout-container {
+    margin-right: 10px;
+  }
+}
+
+/* Add this to your CSS file or style block */
+.is-invalid {
+  border-color: red;
+}
+.invalid-feedback {
+  color: red;
+  font-size: 12px;
+}
+
+.pwd {
+  border: 1px solid red !important;
+}
+
+.pwdvalid {
+  border: 1px solid green !important;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: -14px;
+}
+
+.navtab {
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.curtab {
+  border: 1px solid white;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #cee7ff;
+  color: black;
+  transition:ease-in-out 200ms;
+}
+
+.tabcontent {
+  opacity: 1;
+  animation-name: animatebg;
+  animation-duration: 1s;
+}
+
+@keyframes animatebg {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.nocurtab {
+  opacity: 0.8;
+}
+
+.lonav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #00aeff;
+  color: white;
+  height: 50px;
+  align-items: center;
+}
+
+.tablogo {
+  display: flex;
+  align-items: center;
+}
+
+.tabbtns Button {
+  background-color:rgb(205, 247, 255);
+}
+
+.tabbtns Button a {
+  color:#00aeff !important;
+  text-decoration: none;
+}
+
+.mintabs {
+  display: none;
+}
+
+.burger {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.burgerline {
+  width: 40px;
+  height: 7px;
+  background-color: #00aeff;
+  border-radius: 5px;
+}
+
+.mintablogo {
+  margin-left: 10px;
+}
+
+.mintabtop {
+  display: flex;
+  justify-content: space-between;
+  background-color: #00aeff;
+  color: white;
+  border-bottom: 1px solid white;
+  align-items: center;
+  height: 70px;
+}
+
+@media (max-width: 730px) {
+  .lonav {
+    display: none;
+  }
+  .mintabs {
+    display: flex;
+    flex-direction: column;
+  }
+  .mintabbtm {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .mintabbtm li {
+    list-style: none;
+    border-bottom: 1px solid white;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00aeff;
+    color: white;
+  }
+  .mintabclose {
+    position: absolute;
+    transform: translateY(-300px);
+  }
+}
+
+.logReg {
+  background-color: #00aeff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logregform {
+  width: 500px;
+  max-width: 90%;
+  margin: auto;
+}
+
+.tabcontent {
+  color: black;
+}
+
+.keyspan {
+  font-weight: bold;
+}
+
+.welcomefeatures {
+  list-style-type: decimal;
+}
+
+.welcomeContent {
+  background-color: #00aeff !important;
+  max-width: 90%;
+  width: 700px;
+  margin: auto;
+  color: white !important;
+  margin-top: 80px;
+}
+
+h1 {
+  font-family: 'Lobster', cursive;
+}
+
+.lobsterfont {
+  font-family: 'Lobster', cursive;
+}
+
+.stlogo {
+  font-size: 25px;
+}
+
+.datepickers {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .pmethods {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 740px) {
+  .datepickers {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .paymentfilters {
+    display: flex;
+    flex-direction: column;
+  }
+  .filterbtn {
+    margin: 15px;
+  }
+}
+
+.pagedivs {
+  margin-top: 80px;
+}
+
+.newcustybtn {
+  width: 400px;
+  max-width: 80%;
+  margin: auto;
+  border-radius: 10px !important;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  background-color: #cee7ff !important;
+  border: 2px solid #00aeff !important;
+}
+
+.newcustybtn :only-child {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #cee7ff;
+  box-shadow: 0px 0px 25px 5px #00aeff;
+}
+
+.rbc-time-column {
+  display: none !important;
+}
