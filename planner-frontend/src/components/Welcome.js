@@ -5,7 +5,7 @@ const Welcome = () => {
     <div className='tabcontent'>
         <Card className='welcomeContent'>
         <Card.Body>
-          <h1>Welcome To ServiceTrackr</h1>
+          <h1 className="lobsterfont">Welcome To ServiceTrackr</h1>
           <p>We're here to help you streamline your service business operations and 
             enhance your customer management. With our simple and intuitive 
             interface, managing your customers, work orders, and finances has never been 

@@ -16,7 +16,7 @@ const Round = () => {
   const { authTokens, logoutUser, profile } = useContext(AuthContext);
   const [paymentMethods, setPaymentMethods] = useState({});
   const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(8);
   const [show, setShow] = useState([])
   const [pages, setPages] = useState(0)
 
@@ -243,6 +243,74 @@ const Round = () => {
       }
   }
 
+  const [wsChecked, setWsChecked] = useState({});
+  const [wsDate, setWsDate] = useState({})
+
+  const handleWsDate = (customerId, e) => {
+    if (wsChecked[customerId]) {
+      setWsDate(prevState => ({
+        ...prevState,
+        [customerId]: e
+      }))
+    }
+    console.log(wsDate)
+  }
+
+  const handleWsCheck = (customerId) => {
+    if (wsChecked[customerId]) {
+      setWsDate(prevState => {
+        const newState = { ...prevState };
+        delete newState[customerId];
+        return newState;
+      });
+      setWsChecked(prevState => {
+        const newState = { ...prevState };
+        delete newState[customerId];
+        return newState;
+      });
+    } else {
+      setWsDate(prevState => ({
+        ...prevState,
+        [customerId]: new Date().toISOString().substr(0, 10)
+      }));
+      setWsChecked(prevState => ({
+        ...prevState,
+        [customerId]: true
+      }));
+    }
+    console.log(customerId);
+  };
+
+
+  const saveWorksheet = async () => {
+    console.log(wsDate)
+
+      try {
+          const response = await fetch('http://127.0.0.1:8000/api/add_to_worksheet/', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + String(authTokens.access),
+              },
+              body: JSON.stringify(wsDate),
+          });
+          if (response.ok) {
+          toast.success('Jobs Added To Worksheet Successfully!', { position: toast.POSITION.TOP_CENTER });
+          const data = await response.json();
+
+          console.log(data)
+          setWsChecked({});
+          setWsDate({})
+          } else {
+          const data = await response.json();
+          throw new Error(data.detail);
+          }
+      } catch (error) {
+          console.error('Error occured: ', error);
+          toast.error('Error occured: ', error.message, { position: toast.POSITION.TOP_CENTER });
+      }
+  }
+
 
   return (
     <div className='pagedivs'>
@@ -251,10 +319,11 @@ const Round = () => {
         <Table className='transactionsTable' bordered>
           <thead>
             <tr>
+              <th><Button disabled={Object.keys(wsDate).length === 0} onClick={saveWorksheet} variant='success' style={{padding: '0px 5px 0px 5px', marginLeft: '5px', textDecoration: 'underline'}}>Save To Planner</Button></th>
               <th>Address</th>
               <th>Price</th>
               <th>Due Date</th>
-              <th>Payment Method</th>
+              <th>Payment</th>
               <th>Complete</th>
               <th>Edit/Delete</th>
             </tr>
@@ -262,9 +331,19 @@ const Round = () => {
           <tbody>
             {show.map(customer => (
               <tr key={customer.id}>
-                <td>{customer.address}</td>
+                <td style={{ display: 'flex', alignItems: 'center', height: '100%'}}>
+                  <input disabled={customer.in_worksheet} style={{padding: '0px 3px 0px 3px', margin: '0px 5px 0px 0px', border: '1px solid blue', backgroundColor: '#58aeff', borderRadius: '5px', cursor: 'pointer'}} type='date' value={wsChecked[customer.id] ? wsDate[customer.id] : ''} onChange={(e) => handleWsDate(customer.id, e.target.value)}/>
+                  <input disabled={customer.in_worksheet}
+                    type="checkbox"
+                    checked={wsChecked[customer.id] || false}
+                    onChange={() => handleWsCheck(customer.id)}
+                  />
+                </td>
+                <td className='address'>{customer.address}</td>
                 <td>{customer.price}</td>
-                <td>{customer.due_date}</td>
+                <td className={`address ${new Date() > new Date(customer.due_date) ? 'expired' : ''}`}>
+                  {customer.due_date}
+                </td>
                 <td>
                   <select
                     value={paymentMethods[customer.id] || ''}
@@ -298,7 +377,7 @@ const Round = () => {
         {page < pages && <Button onClick={showNext}>Next</Button> }
       </div>
 
-      <h2 className='lobsterfont'>Page: {page + 1}</h2>
+      <h2>Page: {page + 1}</h2>
 
       <Modal show={showModal}>
         {showModal && 

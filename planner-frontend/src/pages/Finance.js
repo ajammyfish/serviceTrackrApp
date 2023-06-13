@@ -274,7 +274,7 @@ const Finance = () => {
         {page < pages && <Button onClick={showNext}>Next</Button> }
       </div>
 
-      <h2 className='lobsterfont'>Page: {page + 1}</h2>
+      <h2>Page: {page + 1}</h2>
     </div>
   )
 }

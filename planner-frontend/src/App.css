@@ -44,6 +44,12 @@ body {
   background-color: transparent !important;
 }
 
+.address {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .b-ed {
   height: fit-content;
   padding: 0 5px 0 5px !important;
@@ -335,10 +341,6 @@ h2, h3 {
   margin-top: 80px;
 }
 
-h1 {
-  font-family: 'Lobster', cursive;
-}
-
 .lobsterfont {
   font-family: 'Lobster', cursive;
 }
@@ -400,6 +402,112 @@ h1 {
   box-shadow: 0px 0px 25px 5px #00aeff;
 }
 
+.expired {
+  color: red !important;
+}
+
 .rbc-time-column {
   display: none !important;
+}
+
+.rbc-calendar {
+  height: 500px !important;
+  width: fit-content;
+  background-color: aliceblue !important;
+  color:#00aeff !important;
+  border-radius: 10px !important;
+  margin: auto;
+}
+
+.rbc-toolbar {
+  background-color: #0075ac !important;
+  color: white !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.rbc-toolbar button {
+  background-color: #00aeff !important;
+  color: white !important;
+}
+
+.rbc-time-header {
+  height: fit-content;
+}
+
+.rbc-event {
+  background-color: #00aeff !important;
+}
+
+.rbc-agenda-table .rbc-header, .rbc-agenda-time-cell {
+  display: none;
+}
+
+.rbc-month-view {
+}
+
+.rbc-day-slot {
+}
+
+.rbc-event {
+
+}
+
+.rbc-header {
+
+}
+
+.plannermf {
+  justify-content: space-between !important;
+}
+
+.passwordreset {
+  width: fit-content;
+  margin: auto;
+  border: none !important;
+}
+
+.passwordreset form {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.resetgroups {
+  display: flex;
+}
+
+.resetgroups label {
+  width: 80%;
+}
+
+.business-settings {
+  font-size: 20px;
+  margin: auto;
+  margin-bottom: 15px;
+  display: flex;
+  width: fit-content;
+}
+
+.business-settings button {
+  padding: 2px !important;
+  height: fit-content !important;
+  margin-left: 15px;
+}
+
+.reset-delete {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 150px;
+  justify-content: space-evenly;
+}
+
+.reset-delete button {
+  width: fit-content;
+}
+
+.actset {
+  margin-bottom: 80px;
 }

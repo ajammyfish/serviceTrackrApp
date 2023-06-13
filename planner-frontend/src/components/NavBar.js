@@ -17,7 +17,7 @@ const NavBar = () => {
     <Navbar.Collapse id="navbar-nav">
         <Nav className="mr-auto navlinks">
         <Nav.Link as={Link} to="/">Customers</Nav.Link>
-        <Nav.Link as={Link} to="/worksheet">Worksheet</Nav.Link>
+        <Nav.Link as={Link} to="/worksheet">Planner</Nav.Link>
         <Nav.Link as={Link} to="/account">Account</Nav.Link>
         <Nav.Link as={Link} to="/finance">Finance</Nav.Link>
         <Nav.Link as={Link} to="/debts">Debts</Nav.Link>

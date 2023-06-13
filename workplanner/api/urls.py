@@ -21,4 +21,12 @@ urlpatterns = [
     path('activate/<uid>/<token>/', views.activate_account, name='activate_account'),
     path('add_to_worksheet/', views.add_to_worksheet, name='add_to_worksheet'),
     path('get_worksheet/', views.get_worksheet, name='get_worksheet'),
+    path('change_worksheet_date/', views.change_worksheet_date, name='change_worksheet_date'),
+    path('update_worksheet_job/', views.update_worksheet_job, name='update_worksheet_job'),
+    path('delete_worksheet_job/', views.delete_worksheet_job, name='delete_worksheet_job'),
+    path('reset_password/', views.reset_password, name='reset_password'),
+    path('delete_account/', views.delete_account, name='delete_account'),
+    path('change_business_name/', views.change_business_name, name="change_business_name"),
+    path('change_business_type/', views.change_business_type, name="change_business_type"),
+    path('change_round_schedule/', views.change_round_schedule, name="change_round_schedule"),
 ]
