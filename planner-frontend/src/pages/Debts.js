@@ -26,7 +26,7 @@ const Debts = () => {
 
   const getUnpaid = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/history/', {
+      const response = await fetch('http://jdfban.pythonanywhere.com/api/history/', {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const Debts = () => {
     console.log(`Customer ${customerId} payment method saved to ${paymentMethod}`);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/unpaid/', {
+      const response = await fetch('http://jdfban.pythonanywhere.com/api/unpaid/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

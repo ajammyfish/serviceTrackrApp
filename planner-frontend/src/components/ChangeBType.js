@@ -16,7 +16,7 @@ const ChangeBType = ({prof, setprof, show}) => {
             business_type: busType,
         }
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/change_business_type/', {
+            const response = await fetch('http://jdfban.pythonanywhere.com/api/change_business_type/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -41,7 +41,7 @@ const Worksheet = () => {
 
   const getWorksheet = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/get_worksheet/', {
+      const response = await fetch('http://jdfban.pythonanywhere.com/api/get_worksheet/', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ const Worksheet = () => {
     };
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/change_worksheet_date/', {
+        const response = await fetch('http://jdfban.pythonanywhere.com/api/change_worksheet_date/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -162,7 +162,7 @@ const Worksheet = () => {
     };
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/update_worksheet_job/', {
+        const response = await fetch('http://jdfban.pythonanywhere.com/api/update_worksheet_job/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -191,7 +191,7 @@ const Worksheet = () => {
   const handleRemoveEvent = async () => {
     console.log(selectedCustomer.id)
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/delete_worksheet_job/', {
+      const response = await fetch('http://jdfban.pythonanywhere.com/api/delete_worksheet_job/', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',

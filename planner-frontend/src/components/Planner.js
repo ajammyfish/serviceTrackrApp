@@ -36,7 +36,7 @@ const Planner = ( {update, close} ) => {
     console.log(address, price, due_date);
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/new_customer/', {
+        const response = await fetch('http://jdfban.pythonanywhere.com/api/new_customer/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

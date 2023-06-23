@@ -34,7 +34,7 @@ const Finance = () => {
 
   const getHistory = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/history/', {
+      const response = await fetch('http://jdfban.pythonanywhere.com/api/history/', {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json',
