@@ -531,3 +531,79 @@ h2, h3 {
 .actset {
   margin-bottom: 80px;
 }
+
+.expenses-card {
+  margin: auto;
+  width: 400px;
+  margin-bottom: 100px;
+}
+
+.expenses-container {
+  width: 1000px;
+  max-width: 90%;
+  margin: auto;
+  overflow-x: scroll;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.expenses-chart {
+  width: 800px !important;
+  height: auto !important;
+  margin: auto;
+}
+
+.customer-bar {
+  display: flex;
+  background-color: #58aeff;
+  justify-content: space-evenly;
+  text-align: center;
+  padding: 5px;
+  align-items: center;
+  margin: auto;
+  width: 90%;
+  margin-bottom: 40px;
+}
+
+.customer-bar button {
+  text-decoration: underline;
+  background-color: transparent;
+  border: none;
+}
+
+@media screen and (max-width: 600px) {
+  .customer-bar {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .customer-bar {
+    height: 200px;
+    grid-template-columns: 50% 40%;
+  }
+
+  .customer-bar button {
+    background-color: #0066ff;
+    border: 1px solid white;
+  }
+}
+
+.per-page {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.per-page h5 {
+  margin-right: 20px;
+}
+
+.search-customers {
+  width: 90%;
+  margin: auto;
+}
