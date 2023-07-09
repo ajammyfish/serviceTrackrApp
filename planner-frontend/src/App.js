@@ -7,6 +7,7 @@ import Finance from './pages/Finance'
 import Debts from './pages/Debts'
 import Account from './pages/Account'
 import Worksheet from './pages/Worksheet';
+import Expenses from './pages/Expenses';
 
 import PrivateRoutes from './utils/PrivateRoutes';
 import LoggedOutRoutes from './utils/LoggedOutRoutes';
@@ -25,10 +26,11 @@ function App() {
           <Routes>
               <Route element={<PrivateRoutes />}>
                 <Route element={<Home />} path='/' />
-                <Route element={<Finance />} path='/finance' />
+                <Route element={<Finance />} path='/payments' />
                 <Route element={<Debts />} path='/debts' />
                 <Route element={<Account />} path='/account' />
                 <Route element={<Worksheet />} path='/worksheet' />
+                <Route element={<Expenses />} path='/expenses' />
               </Route>
               <Route element={<LoggedOutRoutes />}>
                 <Route path="/login" element={<Login />} />
