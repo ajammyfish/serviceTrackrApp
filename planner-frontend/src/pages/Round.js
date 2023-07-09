@@ -3,11 +3,15 @@ import AuthContext from '../context/AuthContext';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { Modal, Card, Form } from 'react-bootstrap';
+import InputGroup from 'react-bootstrap/InputGroup';
+
+import { AiOutlineSearch } from 'react-icons/ai'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Planner from '../components/Planner';
+import OneOffCustomer from '../components/OneOffCustomer';
 
 
 const Round = () => {
@@ -22,10 +26,15 @@ const Round = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [showInfo, setShowInfo] = useState(false)
 
   const [showDelete, setShowDelete] = useState(false)
 
   const [newcust, setNewcust] = useState(false)
+  const [oneOff, setOneOff] = useState(false)
+
+  const [search, setSearch] = useState('')
+  const [filteredCustomers, setFilteredCustomers] = useState([])
 
 
   useEffect(() => {
@@ -45,6 +54,7 @@ const Round = () => {
       if (response.ok) {
         const data = await response.json();
         setCustomers(data);
+        setFilteredCustomers(data)
         setShow(data.slice(page, perPage))
         setPages(
           Math.ceil(data.length / perPage) -1
@@ -100,9 +110,9 @@ const Round = () => {
 
   const curItems = () => {
     if (page === 0) {
-      setShow(customers.slice(page, perPage))
+      setShow(filteredCustomers.slice(page, perPage))
     } else {
-      setShow(customers.slice((page*perPage), ((page*perPage) + perPage)))
+      setShow(filteredCustomers.slice((page*perPage), ((page*perPage) + perPage)))
     }
   }
 
@@ -116,7 +126,7 @@ const Round = () => {
 
   useEffect(() => {
     curItems();
-  }, [page, customers]);
+  }, [page, filteredCustomers]);
 
   const editCustomer = (customer) => {
     setSelectedCustomer(customer);
@@ -197,6 +207,8 @@ const Round = () => {
     setEditSchedule(selectedCustomer ? (selectedCustomer.schedule === 0) ? '' : selectedCustomer.schedule : '')
 
   }, [selectedCustomer])
+
+
   
   const handleEditSubmit = async (e) => {
       e.preventDefault()
@@ -301,6 +313,8 @@ const Round = () => {
           console.log(data)
           setWsChecked({});
           setWsDate({})
+          getCustomers()
+          setPage(0)
           } else {
           const data = await response.json();
           throw new Error(data.detail);
@@ -311,10 +325,95 @@ const Round = () => {
       }
   }
 
+  const viewCustomer = (id) => {
+    setShowInfo(true)
+    setSelectedCustomer(id)
+  }
+
+  const handleCloseCustomer = () => {
+    setShowInfo(false)
+    setSelectedCustomer(null);
+  }
+
+  const handlePerPageChange = (stringNum) => {
+    if (stringNum === customers.lenth) {
+      setPerPage(stringNum)
+    } else {
+      setPerPage(parseInt(stringNum))
+    }
+  }
+
+  useEffect(() => {
+    setFilteredCustomers(customers)
+    if (search !== '') {
+      // Case insensitive search: convert both search term and address to lower case
+      let results = customers.filter(customer => customer.address.toLowerCase().includes(search.toLowerCase()));
+      setFilteredCustomers(results)
+      setPages(
+        Math.ceil(results.length / perPage) -1
+      )
+    } else {
+      // if search term is empty, display all customers
+      setFilteredCustomers(customers)
+      setShow(customers);
+      setShow(customers.slice(page, perPage))
+      setPages(
+        Math.ceil(customers.length / perPage) -1
+      )
+    }
+  }, [customers])
+
+  useEffect(() => {
+    getCustomers()
+    setPage(0)
+  }, [perPage])
+
+  useEffect(() => {
+    if (search !== '') {
+      // Case insensitive search: convert both search term and address to lower case
+      let results = customers.filter(customer => customer.address.toLowerCase().includes(search.toLowerCase()));
+      setFilteredCustomers(results)
+      setPages(
+        Math.ceil(results.length / perPage) -1
+      )
+    } else {
+      // if search term is empty, display all customers
+      setFilteredCustomers(customers)
+      setShow(customers);
+      setShow(customers.slice(page, perPage))
+      setPages(
+        Math.ceil(customers.length / perPage) -1
+      )
+    }
+  }, [search])
 
   return (
     <div className='pagedivs'>
-      <h1>Round: {profile.business_name}</h1>
+      <h1 style={{fontWeight: 'bold'}}>{profile.business_name}</h1>
+
+      <div className='customer-bar rounded text-light'>
+        <Button variant='primary' onClick={() => {setNewcust(true)}}>Add Recurring Customer</Button>
+        <Button variant='primary' onClick={() => {}}>Book in a quote</Button>
+        <Button variant='primary' onClick={() => {setOneOff(true)}}>Add Non-Recurring Job</Button>
+        <Button variant='primary' onClick={() => {}}>Add New Group</Button>
+      </div>
+      
+
+      <div className='search-customers'>
+        <InputGroup className="mb-3">
+          <InputGroup.Text id="inputGroup-sizing-default">
+            <AiOutlineSearch />
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            placeholder='Start typing to search customers...'
+            value={search}
+            onChange={((e) => setSearch(e.target.value))}
+          />
+        </InputGroup>
+      </div>
+
       <div className='table-container'>
         <Table className='transactionsTable' bordered>
           <thead>
@@ -339,7 +438,7 @@ const Round = () => {
                     onChange={() => handleWsCheck(customer.id)}
                   />
                 </td>
-                <td className='address'>{customer.address}</td>
+                <td style={{textDecoration: 'underline', cursor: 'pointer'}} className='address' onClick={() => viewCustomer(customer)}>{customer.address}</td>
                 <td>{customer.price}</td>
                 <td className={`address ${new Date() > new Date(customer.due_date) ? 'expired' : ''}`}>
                   {customer.due_date}
@@ -378,6 +477,18 @@ const Round = () => {
       </div>
 
       <h2>Page: {page + 1}</h2>
+      <div className='per-page'>
+        <h5>Customers per page:</h5>
+        <Form.Select value={perPage}
+          onChange={e =>
+            handlePerPageChange(e.target.value)
+          } style={{width: '100px', textAlign: 'center'}}>
+          <option value='8'>8</option>
+          <option value="16">16</option>
+          <option value="24">24</option>
+          <option value={customers.length}>All</option>
+        </Form.Select>
+      </div>
 
       <Modal show={showModal}>
         {showModal && 
@@ -447,16 +558,29 @@ const Round = () => {
           </Card>
         </Modal>
 
-        <Card className='newcustybtn'>
-          <Card.Body>
-            <h1>New Customer?</h1>
-            <Button variant='primary' onClick={() => {
-              setNewcust(true)
-            }}>Add New Customer</Button>
-          </Card.Body>
-        </Card>
+        <Modal show={showInfo}>
+        <Card>
+            <Card.Body>
+              <h5>Cutomer Details</h5>
+              <p>Name: {selectedCustomer && selectedCustomer.name}</p>
+              <p>Address: {selectedCustomer && selectedCustomer.address}</p>
+              <p>Price: {selectedCustomer && selectedCustomer.price}</p>
+              <p>Notes: {selectedCustomer && selectedCustomer.notes}</p>
+              <p>Due Date: {selectedCustomer && selectedCustomer.due_date}</p>
+                <Button variant='danger' className='w-50' onClick={handleCloseCustomer}>Close</Button>
+            </Card.Body>
+          </Card>
+        </Modal>
+
+
+
+
         <Modal show={newcust}>
           <Planner close={setNewcust} update={getCustomers} />
+        </Modal>
+
+        <Modal show={oneOff}>
+          <OneOffCustomer close={setOneOff} />
         </Modal>
 
     </div>

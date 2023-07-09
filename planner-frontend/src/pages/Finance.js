@@ -188,7 +188,7 @@ const Finance = () => {
 
   return (
     <div className='pagedivs'>
-        <h1>Your Financial Data</h1>
+        <h1>Payment History</h1>
 
         <Form onSubmit={applyFilters} className="mb-3 paymentfilters col-10 rounded text-light">
           <div className='datepickers'>

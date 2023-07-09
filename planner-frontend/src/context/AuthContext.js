@@ -54,13 +54,17 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  useEffect(() => {
+    updateToken()
+  }, [])
+
   //Refresh access token
   useEffect(() => {
     let interval = setInterval(() => {
       if (authTokens.access) {
         updateToken()
       }
-    }, 29000);
+    }, 240000);
     return () => clearInterval(interval);
   }, [authTokens, loading]);
 
