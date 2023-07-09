@@ -26,7 +26,7 @@ const RegForm = () => {
 
     else {
       try {
-        const response = await fetch('http://jdfban.pythonanywhere.com/api/register/', {
+        const response = await fetch('https://jdfban.pythonanywhere.com/api/register/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

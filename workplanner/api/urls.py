@@ -29,4 +29,7 @@ urlpatterns = [
     path('change_business_name/', views.change_business_name, name="change_business_name"),
     path('change_business_type/', views.change_business_type, name="change_business_type"),
     path('change_round_schedule/', views.change_round_schedule, name="change_round_schedule"),
+    path('get_expenses/', views.get_expenses, name='get_expenses'),
+    path('add_expense/', views.add_expense, name="add_expense"),
+    path('add_one_off/', views.add_one_off, name="add_one_off"),
 ]

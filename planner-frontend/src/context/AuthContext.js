@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   let updateToken = async () => {
     console.log(authTokens.access)
     try {
-      const response = await fetch('http://jdfban.pythonanywhere.com/api/token/refresh/', {
+      const response = await fetch('https://jdfban.pythonanywhere.com/api/token/refresh/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

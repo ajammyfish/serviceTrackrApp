@@ -16,7 +16,7 @@ const ChangeSchedule = ({prof, setprof, show}) => {
             schedule: schedule,
         }
         try {
-            const response = await fetch('http://jdfban.pythonanywhere.com/api/change_round_schedule/', {
+            const response = await fetch('https://jdfban.pythonanywhere.com/api/change_round_schedule/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

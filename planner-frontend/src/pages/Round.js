@@ -34,7 +34,7 @@ const Round = () => {
 
   const getCustomers = async () => {
     try {
-      const response = await fetch('http://jdfban.pythonanywhere.com/api/get_customers/', {
+      const response = await fetch('https://jdfban.pythonanywhere.com/api/get_customers/', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const Round = () => {
     console.log(`Customer ${customerId} payment method saved to ${paymentMethod}`);
 
     try {
-      const response = await fetch('http://jdfban.pythonanywhere.com/api/update_job/', {
+      const response = await fetch('https://jdfban.pythonanywhere.com/api/update_job/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ const Round = () => {
       };
 
       try {
-          const response = await fetch('http://jdfban.pythonanywhere.com/api/delete_customer/', {
+          const response = await fetch('https://jdfban.pythonanywhere.com/api/delete_customer/', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -217,7 +217,7 @@ const Round = () => {
       };
 
       try {
-          const response = await fetch('http://jdfban.pythonanywhere.com/api/edit_customer/', {
+          const response = await fetch('https://jdfban.pythonanywhere.com/api/edit_customer/', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -286,7 +286,7 @@ const Round = () => {
     console.log(wsDate)
 
       try {
-          const response = await fetch('http://jdfban.pythonanywhere.com/api/add_to_worksheet/', {
+          const response = await fetch('https://jdfban.pythonanywhere.com/api/add_to_worksheet/', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',

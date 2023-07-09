@@ -24,7 +24,7 @@ const BuildProfile = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://jdfban.pythonanywhere.com/api/activate/', {
+      const response = await fetch('https://jdfban.pythonanywhere.com/api/activate/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

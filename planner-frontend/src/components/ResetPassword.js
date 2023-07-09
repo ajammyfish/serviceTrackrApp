@@ -48,7 +48,7 @@ const ResetPassword = ({show}) => {
             if (newPassword == confirmPassword) {
 
                 try {
-                    const response = await fetch('http://jdfban.pythonanywhere.com/api/reset_password/', {
+                    const response = await fetch('https://jdfban.pythonanywhere.com/api/reset_password/', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

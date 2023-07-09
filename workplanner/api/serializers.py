@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Customer, History, User, UserProfile
+from .models import Customer, History, User, UserProfile, Expenses
 from django.contrib.auth import authenticate
 from rest_framework.serializers import ModelSerializer
 
@@ -24,7 +24,7 @@ class RegistrationSerializer(serializers.Serializer):
             email=validated_data['email'],
             username=validated_data['username'],
             password=validated_data['password'],
-            is_active=False
+            is_active=True
         )
         UserProfile.objects.create(user=user)
         return user
@@ -40,8 +40,17 @@ class HistorySerializer(ModelSerializer):
         model = History
         fields = '__all__'
 
-
 class ProfileSerializer(ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('business_type', 'business_name', 'round_schedule', 'is_account_setup')
+
+class ExpensesSerializer(serializers.ModelSerializer):
+    expense_category = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Expenses
+        fields = '__all__'
+
+    def get_expense_category(self, obj):
+        return dict(Expenses.EXPENSE_CATEGORIES).get(obj.expense_category, '')

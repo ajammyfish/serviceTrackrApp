@@ -17,6 +17,7 @@ class Customer(models.Model):
     schedule = models.PositiveIntegerField(default=0)
     in_worksheet = models.BooleanField(default=False)
     worksheet_date = models.DateField(null=True, blank=True)
+    non_recurring = models.BooleanField(default=False)
 
 class History(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -31,3 +32,17 @@ class UserProfile(models.Model):
     business_type = models.CharField(max_length=100)
     business_name = models.CharField(max_length=100)
     round_schedule = models.PositiveIntegerField(null=True, blank=True)
+
+class Expenses(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    date = models.DateField()
+    EXPENSE_CATEGORIES = [
+        ('fuel', 'Fuel'),
+        ('business_equipment', 'Business Equipment'),
+        ('water', 'Water'),
+        ('vehicle_costs', 'Vehicle Costs'),
+        ('other', 'Other...')
+    ]
+    expense_category = models.TextField(choices=EXPENSE_CATEGORIES)
+    expense_name = models.TextField()
+    cost = models.IntegerField()

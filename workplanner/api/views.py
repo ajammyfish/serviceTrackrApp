@@ -2,8 +2,8 @@ from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from .serializers import RegistrationSerializer, HistorySerializer, CustomerSerializer, ProfileSerializer
-from .models import User, Customer, History, UserProfile
+from .serializers import RegistrationSerializer, HistorySerializer, CustomerSerializer, ProfileSerializer, ExpensesSerializer
+from .models import User, Customer, History, UserProfile, Expenses
 from django.http import JsonResponse
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
@@ -51,12 +51,12 @@ def register(request):
     serializer = RegistrationSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
-        token = default_token_generator.make_token(user)
-        uid = user.id
-        activation_link = f"http://localhost:8000/api/activate/{uid}/{token}/"
-        template = render_to_string('activation_email.html', {'user': user.email, 'link': activation_link})
-        send_mail('Verify Account With ServiceTrackr', template, 'serviceTrackrApp@gmail.com', [user.email])
-        return Response({'message': 'Please confirm your registration by clicking the link sent to your email.'}, status=status.HTTP_201_CREATED)
+        #token = default_token_generator.make_token(user)
+        #uid = user.id
+        #activation_link = f"http://localhost:8000/api/activate/{uid}/{token}/"
+        #template = render_to_string('activation_email.html', {'user': user.email, 'link': activation_link})
+        #send_mail('Verify Account With ServiceTrackr', template, 'serviceTrackrApp@gmail.com', [user.email])
+        return Response({'message': 'Account created!'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def activate_account(request, uid, token):
@@ -322,15 +322,20 @@ def update_worksheet_job(request):
     payment_method=payment_method
     )
 
-    # Set new date for customer
-    if specific_schedule == 0:
-        new_date = worksheet_date + timedelta(weeks=schedule)
+    if customer.non_recurring == False:
+        # Set new date for customer
+        if specific_schedule == 0:
+            new_date = worksheet_date + timedelta(weeks=schedule)
+        else:
+            new_date = worksheet_date + timedelta(weeks=specific_schedule)
+        customer.due_date = new_date
+        customer.in_worksheet = False
+        customer.worksheet_date = None
+        customer.save()
+    
     else:
-        new_date = worksheet_date + timedelta(weeks=specific_schedule)
-    customer.due_date = new_date
-    customer.in_worksheet = False
-    customer.worksheet_date = None
-    customer.save()
+        customer.is_deleted = True
+        customer.save()
 
     customers = request.user.customer_set.filter(is_deleted=False, in_worksheet=True)
     serializer = CustomerSerializer(customers, many=True)
@@ -339,6 +344,7 @@ def update_worksheet_job(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def delete_worksheet_job(request):
+
     customer_id = request.data.get('customerId')
 
     # Check valid data
@@ -348,9 +354,12 @@ def delete_worksheet_job(request):
     # Get customer and schedule
     customer = Customer.objects.get(id=customer_id)
 
-    customer.in_worksheet = False
-    customer.worksheet_date = None
-    customer.save()
+    if customer.non_recurring == False:
+        customer.in_worksheet = False
+        customer.worksheet_date = None
+        customer.save()
+    else:
+        customer.delete()
 
     customers = request.user.customer_set.filter(is_deleted=False, in_worksheet=True)
     serializer = CustomerSerializer(customers, many=True)
@@ -462,3 +471,64 @@ def change_round_schedule(request):
         }
     }
     return Response(response_data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_expenses(request):
+    expenses = Expenses.objects.filter(user=request.user).order_by('date')
+    serializer = ExpensesSerializer(expenses, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_expense(request):
+    user = request.user
+    expense_category = request.data.get('expense_category')
+    expense_name = request.data.get('expense_name')
+    cost = request.data.get('cost')
+    date = request.data.get('date')
+
+    # Check valid data
+    if expense_category is None or cost is None:
+        return JsonResponse({'error': 'Invalid data'}, status=400)
+    
+    # Create object and save
+    expense = Expenses.objects.create(
+    user=user,
+    expense_category=expense_category,
+    expense_name=expense_name,
+    cost=cost,
+    date=date,
+    )
+
+    expense.save()
+
+    expenses = request.user.expenses_set.order_by('date')
+    serializer = ExpensesSerializer(expenses, many=True)
+    return Response(serializer.data, status=201)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_one_off(request):
+    data = request.data
+    data['owner'] = request.user.id
+    data['price'] = int(data['price'])  # Convert price to an integer
+    data['due_date'] = datetime.strptime(data['due_date'], '%Y-%m-%d').date()  # Parse due_date as a date object
+    data['schedule'] = 0
+    
+    if data['phone'] == '':
+        del data['phone']
+    else:
+        data['phone'] = int(data['phone'])
+    
+    data['worksheet_date'] = data['due_date']
+    data['in_worksheet'] = True
+    data['non_recurring'] = True
+
+    print(data)
+
+    serializer = CustomerSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
