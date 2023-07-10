@@ -607,3 +607,52 @@ h2, h3 {
   width: 90%;
   margin: auto;
 }
+
+.export-customers {
+  background-color: white !important;
+  color: #0066ff !important;
+  font-weight: bold !important;
+  margin: 15px;
+}
+
+.import-customers {
+  background-color: white !important;
+  color: rgb(1, 180, 49) !important;
+  font-weight: bold !important;
+  border: 1px solid  rgb(1, 180, 49) !important;
+  margin: 15px;
+}
+
+.export-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+
+.upload-img-container {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+.upload_customers_card button {
+  width: fit-content;
+}
+
+.upload-inputs {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: auto;
+  margin-top: 10px
+}
+
+.upload-inputs input {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .upload-inputs {
+    flex-direction: column;
+    align-items: center;
+  }
+}

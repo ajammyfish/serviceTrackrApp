@@ -6,12 +6,17 @@ import { Modal, Card, Form } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 import { AiOutlineSearch } from 'react-icons/ai'
+import { BsDownload, BsUpload } from 'react-icons/bs'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Planner from '../components/Planner';
 import OneOffCustomer from '../components/OneOffCustomer';
+
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import FileUpload from '../components/FileUpload';
 
 
 const Round = () => {
@@ -32,6 +37,7 @@ const Round = () => {
 
   const [newcust, setNewcust] = useState(false)
   const [oneOff, setOneOff] = useState(false)
+  const [showFileUpload, setShowFileUpload] = useState(false)
 
   const [search, setSearch] = useState('')
   const [filteredCustomers, setFilteredCustomers] = useState([])
@@ -40,6 +46,43 @@ const Round = () => {
   useEffect(() => {
     getCustomers();
   }, []);
+
+  const exportPDF = () => {
+    const doc = new jsPDF("p", "pt", "a4");
+
+    const tableData = customers.map(customer => [
+        customer.name,
+        customer.address,
+        customer.price,
+        customer.due_date,
+        customer.phone,
+        customer.email,
+        customer.notes,
+    ]);
+    const tableHeaders = [["Name", "Address", "Price", "Due Date", "Phone", "Email", "Notes"]];
+
+    doc.autoTable({
+      head: tableHeaders,
+      body: tableData,
+      theme: 'grid',
+      styles: { 
+          fillColor: [255, 255, 255],
+          textColor: [0, 0, 0],
+          lineColor: [169, 169, 169],
+          fontSize: 10 
+      },
+      headStyles: { 
+          fillColor: [0, 102, 255],
+          textColor: [255, 255, 255],
+          fontSize: 12,
+      },
+  });
+  
+  
+
+    doc.save("customers.pdf");
+};
+
 
   const getCustomers = async () => {
     try {
@@ -369,6 +412,7 @@ const Round = () => {
   }, [perPage])
 
   useEffect(() => {
+    setPage(0)
     if (search !== '') {
       // Case insensitive search: convert both search term and address to lower case
       let results = customers.filter(customer => customer.address.toLowerCase().includes(search.toLowerCase()));
@@ -476,6 +520,8 @@ const Round = () => {
         {page < pages && <Button onClick={showNext}>Next</Button> }
       </div>
 
+
+
       <h2>Page: {page + 1}</h2>
       <div className='per-page'>
         <h5>Customers per page:</h5>
@@ -489,6 +535,12 @@ const Round = () => {
           <option value={customers.length}>All</option>
         </Form.Select>
       </div>
+
+      <div className='export-buttons'>
+        <Button className='export-customers' onClick={exportPDF}>Export PDF <BsDownload style={{fontSize: '22px', marginLeft: '5px'}} /></Button>
+        <Button className='import-customers' onClick={() => setShowFileUpload(true)}>Upload Customers <BsUpload style={{fontSize: '22px', marginLeft: '5px'}} /></Button>
+      </div>
+
 
       <Modal show={showModal}>
         {showModal && 
@@ -578,6 +630,11 @@ const Round = () => {
         <Modal show={newcust}>
           <Planner close={setNewcust} update={getCustomers} />
         </Modal>
+
+        <Modal show={showFileUpload}>
+          <FileUpload close={setShowFileUpload} refresh={getCustomers} resetPage={setPage}/>
+        </Modal>
+
 
         <Modal show={oneOff}>
           <OneOffCustomer close={setOneOff} />
