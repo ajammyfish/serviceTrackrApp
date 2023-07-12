@@ -1,11 +1,13 @@
 import { Form, Button, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const RegForm = () => {
+
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
@@ -34,12 +36,12 @@ const RegForm = () => {
           body: JSON.stringify({ email, username, password }),
         });
         if (response.ok) {
-          toast.success('Please confirm your registration by clicking the link sent to your email.', { position: toast.POSITION.TOP_CENTER });
+          toast.success('Account created successfully!', { position: toast.POSITION.TOP_CENTER });
           setEmail('')
           setUsername('')
           setPassword('')
-          console.log(response);
-          setRegcomplete('Please confirm your registration by clicking the link sent to your email.')
+          setRegcomplete('Account created successfully!')
+          navigate('/login')
         } else {
           setEmail('')
           setUsername('')
