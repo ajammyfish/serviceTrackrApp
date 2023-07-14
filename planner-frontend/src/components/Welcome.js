@@ -12,13 +12,12 @@ const Welcome = () => {
         transition={{ duration: 1 }}
       >
         <div className="welcome-top">
-          <div className="welcome-headers">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
             >
-              <h1>Welcome To <span className="lobsterfont">ServiceTrackr</span></h1>
+              <h1><span className="lobsterfont">ServiceTrackr</span></h1>
             </motion.div>
 
             <motion.div
@@ -36,7 +35,6 @@ const Welcome = () => {
               />
               </h2>
             </motion.div>
-          </div>
         </div>
       </motion.div>
 
@@ -46,27 +44,79 @@ const Welcome = () => {
         transition={{ duration: 1, delay: 1.5 }}
       >
       <div className='welcome-content'>
-          <p>We're here to help you streamline your service business operations and 
-            enhance your customer management. With our simple and intuitive 
-            interface, managing your customers, work orders, and finances has never been 
-            easier. Focus on what you do best, and let us handle the rest!</p>
-            <motion.div
+          <h2 style={{fontWeight: 'bold'}}>An app for service business owners.</h2>
+      </div>
+      </motion.div>
+
+      <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 2 }}
           >
-          <div>
-            <h3 style={{textDecoration: 'underline'}}>Key Features</h3>
-            <ul className="welcome-features">
-              <li><span className="keyspan">Customer Management:</span> Keep track of all your customers in one place. Store contact information, service history, and notes for personalized interactions.</li>
-              <li><span className="keyspan">Work Order Tracking:</span> Create, assign, and track work orders efficiently. Stay organized and ensure timely completion of tasks.</li>
-              <li><span className="keyspan">Financial Management:</span> Gain control over your business finances. Track invoices, expenses, and payments for accurate financial reporting.</li>
-              <li><span className="keyspan">Scheduling and Planning:</span> Simplify your scheduling process and assign jobs to your planner with ease. Stay on top of your customer base.</li>
-            </ul>
-          </div>
+          <div className="cube-container">
+            <div className="cube-face front">
+              <h3>Customer Tracking & Scheduling</h3>
+            </div>
+            <div className="cube-face back">
+              <h3>Financial Management</h3>
+            </div>
+            <div className="cube-face right">
+              <h3>Route Optimisation</h3>
+            </div>
+            <div className="cube-face left">
+              <h3>Powerful Data Analytics</h3>
+            </div>
+            <div className="cube-face top">
+            </div>
+            <div className="cube-face bottom">
+            </div>
+        </div>
           </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.5 }}
+      >
+      <div className="welcome-info">
+        <div className="info1">
+          <p>
+            Welcome to <b style={{color: '#0066ff', textDecoration: 'underline'}}>ServiceTrackr</b>, the all-in-one business management tool for service business owners.
+          </p>
+          <p>
+            Being the owner of an Exterior Cleaning Business myself, I noticed the 
+            lack of reasonably priced, straightforward, functional software on the market, 
+            which is what lead me to developing ServiceTrackr.
+          </p>
+          <p>
+            My aim was to create the type of app that I myself would like to use, and that meant keeping it simple, 
+            easy to use, and including all the functionalities I need to manage my business. 
+          </p>
+        </div>
+        <div className="info2">
+          <ul>
+            <li>
+              <span className="info2span">Customer Management:</span><br />
+            </li>
+            <li>
+              <span className="info2span">Financial Tracking:</span><br />
+            </li>
+            <li>
+              <span className="info2span">Data Analytics:</span><br />
+            </li>
+            <li>
+              <span className="info2span">Route Optimisation:</span><br />
+            </li>
+          </ul>
+        </div>
       </div>
       </motion.div>
+
+      
+
+
+
+
     </div>
   )
 }
