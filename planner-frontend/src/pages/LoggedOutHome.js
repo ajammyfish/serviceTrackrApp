@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 import Welcome from '../components/Welcome';
 import Features from '../components/Features';
 import Contact from '../components/Contact';
-import Pricing from '../components/Pricing';
 
 import { useState } from 'react';
 
@@ -25,12 +24,6 @@ const LoggedOutHome = () => {
           </div>
           <div className={curtab === 2 ? 'curtab navtab' : 'nocurtab navtab'} onClick={() => setCurtab(2)}>
             Features
-          </div>
-          <div className={curtab === 3 ? 'curtab navtab' : 'nocurtab navtab'} onClick={() => setCurtab(3)}>
-            Pricing
-          </div>
-          <div className={curtab === 4 ? 'curtab navtab' : 'nocurtab navtab'} onClick={() => setCurtab(4)}>
-            Contact
           </div>
         </div>
         <div className='tabbtns'>
@@ -66,14 +59,7 @@ const LoggedOutHome = () => {
             setCurtab(2)
             setNavopen(false)
           }}>Features</li>
-          <li onClick={() => {
-            setCurtab(3)
-            setNavopen(false)
-          }}>Pricing</li>
-          <li onClick={() => {
-            setCurtab(4)
-            setNavopen(false)
-          }}>Contact</li>
+
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/register">Register</Link></li>
         </ul> 
@@ -82,8 +68,6 @@ const LoggedOutHome = () => {
 
       {curtab === 1 && <Welcome />}
       {curtab === 2 && <Features />}
-      {curtab === 3 && <Pricing />}
-      {curtab === 4 && <Contact />}
 
     </div>
   );

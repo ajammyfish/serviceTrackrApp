@@ -1,24 +1,38 @@
 {
   "files": {
-    "main.css": "/static/css/main.d45475fb.css",
-    "main.js": "/static/js/main.1f0430d2.js",
+    "main.css": "/static/css/main.b9dbc098.css",
+    "main.js": "/static/js/main.049a809a.js",
     "static/js/498.bd69e043.chunk.js": "/static/js/498.bd69e043.chunk.js",
     "static/js/703.9994c1c5.chunk.js": "/static/js/703.9994c1c5.chunk.js",
-    "static/js/513.811bc606.chunk.js": "/static/js/513.811bc606.chunk.js",
+    "static/js/513.73f61d2b.chunk.js": "/static/js/513.73f61d2b.chunk.js",
+    "static/media/customerpayment.png": "/static/media/customerpayment.78cb0930763f318f60f3.png",
+    "static/media/uploadcsv.png": "/static/media/uploadcsv.8f83f02788a3b7a4f20e.png",
+    "static/media/newcustomerfilled.png": "/static/media/newcustomerfilled.a38d38c403d8a83afe77.png",
+    "static/media/donwloadtable.png": "/static/media/donwloadtable.da414bcb5e6f0e5c7160.png",
+    "static/media/addplanner.png": "/static/media/addplanner.709f3f964cc73ac3cc25.png",
+    "static/media/paymenthistory2.png": "/static/media/paymenthistory2.21f5e268fad864000dd0.png",
+    "static/media/paymenthistory.png": "/static/media/paymenthistory.84972703e33446b48ebc.png",
+    "static/media/customerdetails.png": "/static/media/customerdetails.3061bd0a7376b6f06581.png",
+    "static/media/debts.png": "/static/media/debts.aeb417ea131242619112.png",
+    "static/media/plannerexpand.png": "/static/media/plannerexpand.ec71c13f30ca631a97d0.png",
+    "static/media/expensetable.png": "/static/media/expensetable.d84a32b9d349badcf22b.png",
+    "static/media/expensechart.png": "/static/media/expensechart.864177ae7611fba5fb2e.png",
     "static/media/tech.avif": "/static/media/tech.3404ad3cd8bc294911d8.avif",
+    "static/media/setupcomplete.png": "/static/media/setupcomplete.af23244bbc0906135fac.png",
+    "static/media/plannerday.png": "/static/media/plannerday.97c4aa814b414a06b3da.png",
     "static/media/csvlayout.png": "/static/media/csvlayout.411ae5928ed39775a4a3.png",
     "static/media/finance.avif": "/static/media/finance.0a08a4029f4dd70882e6.avif",
     "static/media/routeplan.avif": "/static/media/routeplan.08d1fd02660f20b677f8.avif",
     "static/media/planning.avif": "/static/media/planning.4ef0bf9459504ce6341f.avif",
     "index.html": "/index.html",
-    "main.d45475fb.css.map": "/static/css/main.d45475fb.css.map",
-    "main.1f0430d2.js.map": "/static/js/main.1f0430d2.js.map",
+    "main.b9dbc098.css.map": "/static/css/main.b9dbc098.css.map",
+    "main.049a809a.js.map": "/static/js/main.049a809a.js.map",
     "498.bd69e043.chunk.js.map": "/static/js/498.bd69e043.chunk.js.map",
     "703.9994c1c5.chunk.js.map": "/static/js/703.9994c1c5.chunk.js.map",
-    "513.811bc606.chunk.js.map": "/static/js/513.811bc606.chunk.js.map"
+    "513.73f61d2b.chunk.js.map": "/static/js/513.73f61d2b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d45475fb.css",
-    "static/js/main.1f0430d2.js"
+    "static/css/main.b9dbc098.css",
+    "static/js/main.049a809a.js"
   ]
 }

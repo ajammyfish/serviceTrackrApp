@@ -1,58 +1,84 @@
 import { motion } from "framer-motion"
+import Setup from '../imgs/screenshots/setupcomplete.png'
+import Upload from '../imgs/screenshots/uploadcsv.png'
+import NewCustomer from '../imgs/screenshots/newcustomerfilled.png'
+import Customers from '../imgs/screenshots/customerpayment.png'
+import Details from '../imgs/screenshots/customerdetails.png'
+import AddPlanner from '../imgs/screenshots/addplanner.png'
+import PlannerDay from '../imgs/screenshots/plannerday.png'
+import PlannerExpand from '../imgs/screenshots/plannerexpand.png'
+import Payments from '../imgs/screenshots/paymenthistory.png'
+import Payments2 from '../imgs/screenshots/paymenthistory2.png'
+import ExpenseTable from '../imgs/screenshots/expensetable.png'
+import ExpenseChart from '../imgs/screenshots/expensechart.png'
+import Debts from '../imgs/screenshots/debts.png'
+import Download from '../imgs/screenshots/donwloadtable.png'
 
 const Features = () => {
   return (
     <div className='tabcontent'>
 
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="welcome-top">
-          <div className="welcome-headers">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-            >
-              <h1>What can you do with ServiceTrackr?</h1>
-            </motion.div>
-          </div>
+        <div className="features-headers">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <h1>What can you do with ServiceTrackr?</h1>
+          </motion.div>
         </div>
-      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
       >
-      <div className='welcome-content'>
-          <div>
-            <ul className="welcome-features">
-              <h4 style={{fontWeight: 'bold', textAlign: 'center'}}>The current features of ServiceTrackr are as follows:</h4>
-              <li>Set up your business account with a round name and default scheduling</li>
-              <li>Add customers to your round with detailed information</li>
-              <li>View all customers via the customer page</li>
-              <li>Select a date and customer to add to your planner, to build a worksheet</li>
-              <li>Mark customers as complete and save payment method once work is carried out</li>
-              <li>View entire payment history and financial breakdown</li>
-              <li>View debts</li>
-              <p className="my-5">More features are coming soon, as the app is still in early development.</p>
-
-            </ul>
+        <div className="welcome-features">
+          <div className="features-card">
+            <li>Set up your account with your business information</li>
+            <img src={Setup}></img>
           </div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 2 }}
-          >
-          <p>We've purposely made the user experience as straight forward and simple as possible, 
-            so you don't have to waste any time learning or getting used to the functionality!
-          </p>
-          </motion.div>
-      </div>
+          <div className="features-card">
+            <li>Add/import customers to your round</li>
+            <img src={Upload}></img>
+            <img src={NewCustomer}></img>
+          </div>
+          <div className="features-card">
+            <li>Download customer base via PDF</li>
+            <img src={Download}></img>
+          </div>
+          <div className="features-card">
+            <li>View a date-ordered table of customers, with the ability to edit, delete, or mark work as complete</li>
+            <img src={Customers}></img>
+            <img src={Details}></img>
+          </div>
+          <div className="features-card">
+            <li>Select a date and customer to add to your planner, to build a worksheet</li>
+            <img src={AddPlanner}></img>
+            <img src={PlannerDay}></img>
+            <img src={PlannerExpand}></img>
+          </div>
+          <div className="features-card">
+            <li>View entire payment history and full financial breakdown</li>
+            <img src={Payments}></img>
+          </div>
+          <div className="features-card">
+            <li>Track expenses and view a full breakdown</li>
+            <img src={ExpenseTable}></img>
+            <img src={ExpenseChart}></img>
+          </div>
+          <div className="features-card">
+            <li>Track unpaid customers and update their payment methods</li>
+            <img src={Debts}></img>
+          </div>
+          <div className="features-card">
+            <li>Plan routes using route optimisation technology</li>
+          </div>
+          <div className="features-card">
+            <li>View powerful business data via the dashboard</li>
+          </div>
+        </div>
       </motion.div>
     </div>
   )

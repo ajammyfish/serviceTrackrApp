@@ -89,23 +89,31 @@ const Welcome = () => {
             which is what lead me to developing ServiceTrackr.
           </p>
           <p>
-            My aim was to create the type of app that I myself would like to use, and that meant keeping it simple, 
-            easy to use, and including all the functionalities I need to manage my business. 
+            My aim was to create a simple but powerful solution. I made sure to keep the user experience as 
+            seamless and intuitive as possible whilst simultaneously implementing complex functionalities under 
+            the hood.
           </p>
         </div>
         <div className="info2">
           <ul>
             <li>
               <span className="info2span">Customer Management:</span><br />
+              Upload your customers, either manually or via CSV file, track them throughout your work cycle, and 
+              book them into your planner.
             </li>
             <li>
               <span className="info2span">Financial Tracking:</span><br />
+              Track customer payments as well as expenses, and view a full financial breakdown.
             </li>
             <li>
               <span className="info2span">Data Analytics:</span><br />
+              Use your dashboard to view powerful data analytics surrounding your business, allowing you 
+              to make data driven decisions.
             </li>
             <li>
               <span className="info2span">Route Optimisation:</span><br />
+              Shorten your work day by using our route calculator to sort your customers based on 
+              route optimisation technology.
             </li>
           </ul>
         </div>
